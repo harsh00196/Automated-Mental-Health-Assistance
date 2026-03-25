@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: mental-health-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --log-file -
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      # You need to define these manually in the Render Dashboard
+      - key: SECRET_KEY
+        sync: false
+      - key: JWT_SECRET_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      # Optional: Change to a Postgres URL if moving away from SQLite
+      - key: DATABASE_URL
+        sync: false
+    # Use a persistent disk to ensure SQLite database isn't wiped on restart
+    disk:
+      name: mental-health-data
+      mountPath: /data
+      sizeGB: 1
