@@ -47,3 +47,4 @@ uritemplate==4.2.0
 urllib3==2.6.3
 vaderSentiment==3.3.2
 Werkzeug==3.1.7
+gunicorn==21.2.0
